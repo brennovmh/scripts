@@ -1,0 +1,45 @@
+from interop import py_interop_run_metrics, py_i
+import numpy
+import pandas as pd
+
+run_folder = ("/home/bvmh/Desktop/run-data") ####COLOCAR SUA PASTA DE TRABALHO AQUI!
+
+run_metrics = py_interop_run_metrics.run_met
+run_folder = run_metrics.read(run_folder)
+
+valid_to_load = py_interop_run.uchar_vector(py_interop_run.MetricCount, 0)
+py_interop_table.list_imaging_table_metrics_to_load(valid_to_load)
+
+columns = py_interop_table.imaging_column_vector()
+py_interop_table.create_imaging_table_columns(run_metrics, columns)
+
+headers = []
+for i in range(columns.size()):
+    column = columns[i]
+    if column.has_children():
+        headers.extend([column.name()+"("+subname+")" for subname in column.subcolumns()])
+    else:
+        headers.append(column.name())
+
+row_count=3
+column_count=7
+headers=headers[:column_count]
+
+print(headers)
+
+column_count = py_interop_table.count_table_columns(columns)
+row_offsets = py_interop_table.map_id_offset()
+py_interop_table.count_table_rows(run_metrics, row_offsets)
+data = numpy.zeros((row_offsets.size(), column_count), dtype=numpy.float32)
+py_interop_table.populate_imaging_table_data(run_metrics, columns, row_offsets, data.ravel())
+
+data=data[:row_count, :]
+
+d = []
+for col, label in enumerate(headers):
+    d.append( (label, pd.Series([val for val in data[:, col]], index=[tuple(r) for r in  data[:, :3]])))
+
+df = pd.DataFrame.from_dict(dict(d))
+print(df.to_string(index=False))
+
+#### DOCUMENTATION: https://notebook.community/Illumina/interop/docs/src/Tutorial_05_Imaging_Table
