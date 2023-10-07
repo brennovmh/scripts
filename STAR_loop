@@ -1,1 +1,1 @@
-for file in *.fastq; do STAR --runMode alignReads --genomeDir /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/ref  --outSAMtype BAM SortedByCoordinate --readFilesIn ${file} --runThreadN 12 --outFileNamePrefix /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/${file}; done
+for file in *.fastq; do STAR --runMode alignReads --genomeDir /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/ref_atualizado  --outSAMtype BAM SortedByCoordinate --readFilesIn ${file} --runThreadN 12 --outFileNamePrefix /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/${file}; done
