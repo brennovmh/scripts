@@ -20,3 +20,19 @@ do
 	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.4.0.gff3 4\
 	"$line" ;
 done < /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/bam_novo/bam/arquivos.txt
+
+
+## PARA FAZER LOOP: GERA UM ARQUIVO TXT COM "REALPATH" DE TODOS OS ARQUIVOS FUSION (arquivos.txt) E USE O SCRIPT ABAIXO:
+
+#!/bin/bash
+
+while read -r line;
+do
+         ./draw_fusions.R \
+    --fusions="$line1" \
+    --output="$line1".pdf \
+    --annotation=/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/Homo_sapiens.GRCh38.110.gtf \
+    --cytobands=/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/cytobands_hg38_GRCh38_v2.4.0.tsv \
+    --proteinDomains=/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.4.0.gff3;
+done < /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/fusions/fusions.arquivos.txt
+
