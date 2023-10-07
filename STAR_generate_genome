@@ -1,0 +1,1 @@
+STAR --runMode genomeGenerate --genomeDir ./ref/ --genomeFastaFiles Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa --sjdbGTFfile Homo_sapiens.GRCh38.110.gtf --runThreadN 16
