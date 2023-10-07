@@ -6,3 +6,17 @@
 /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.4.0.tsv \
 /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.4.0.gff3 4\
 /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/bam_novo/bam/BM1153-5.fastqAligned.sortedByCoord.out.bam
+
+## PARA FAZER LOOP: GERA UM ARQUIVO TXT COM "REALPATH" DE TODOS OS ARQUIVOS BAM (arquivos.txt) E USE O SCRIPT ABAIXO:
+
+while read -r line;
+do
+	/run_arriba_on_prealigned_bam_copy.sh \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/ref_atualizado/ \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/Homo_sapiens.GRCh38.110.gtf \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/Homo_sapiens.GRCh38.dna_sm.primary_assembly.fa \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/blacklist_hg38_GRCh38_v2.4.0.tsv \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/known_fusions_hg38_GRCh38_v2.4.0.tsv \
+	/mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/arriba_v2.4.0/database/protein_domains_hg38_GRCh38_v2.4.0.gff3 4\
+	"$line" ;
+done < /mnt/fb9227d1-ba4c-4a6d-b0c1-3b1224e3b4ea/brenno/BAM_files/bam_novo/bam/arquivos.txt
